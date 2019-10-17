@@ -12,4 +12,5 @@
 
   # add the learner to the dictionary
   x$add("classif.ctree", LearnerClassifCTree)
+  x$add("regr.ctree", LearnerRegrCTree)
 } # nocov end

@@ -1,6 +1,6 @@
-#' @title Classification Conditional Inference Tree Learner
+#' @title Regression Conditional Inference Tree Learner
 #'
-#' @format [R6::R6Class] inheriting from [LearnerClassif].
+#' @format [R6::R6Class] inheriting from [LearnerRegr].
 #'
 #' @description
 #' MISSING.
@@ -12,7 +12,7 @@
 #' \url{https://doi.org/10.1023/A:1010933404324}
 #'
 #' @export
-LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
+LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
   public = list(
     initialize = function() {
       ps = ParamSet$new( # parameter set using the paradox package
@@ -21,12 +21,12 @@ LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
       )
 
       super$initialize(
-        id = "classif.ctree",
+        id = "regr.ctree",
         packages = "partykit",
         feature_types = c("numeric", "factor", "ordered"),
         predict_types = c("response"),
         param_set = ps,
-        properties = c("weights", "twoclass", "multiclass")
+        properties = c("weights")
       )
     },
 
@@ -44,7 +44,7 @@ LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
       p = mlr3misc::invoke(predict, self$model, newdata = newdata, .args = pars)
 
       # Return a prediction object with PredictionClassif$new() or PredictionRegr$new()
-      PredictionClassif$new(task = task, response = p)
+      PredictionRegr$new(task = task, response = p)
     }
   )
 )
