@@ -70,6 +70,15 @@ LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
 
     train_internal = function(task) {
       pars = self$param_set$get_values(tags = "train")
+      if(!is.null(pars$alpha) && !is.null(pars$mincriterion)) {
+        warning("Because you set the mincriterion parameter, it will overwrite the parameter alpha.")
+      }
+      if(!is.null(pars$alpha) && !is.null(pars$logmincriterion)) {
+        warning("Because you set the logmincriterion parameter, it will overwrite the parameter alpha.")
+      }
+      if(!is.null(pars$mincriterion) && !is.null(pars$logmincriterion)) {
+        warning("Because you set the logmincriterion parameter, it will overwrite the parameter mincriterion.")
+      }
       f = task$formula()
       data = task$data()
       if (is.null(task$weights)) {
