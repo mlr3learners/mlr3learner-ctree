@@ -19,6 +19,7 @@ Imports:
     partykit,
     R6
 Suggests:
+    checkmate,
     bibtex,
     testthat
 Encoding: UTF-8
