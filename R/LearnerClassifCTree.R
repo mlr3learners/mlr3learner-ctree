@@ -60,41 +60,36 @@ LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
         id = "classif.ctree",
         packages = "partykit",
         feature_types = c("numeric", "factor", "ordered"),
-        predict_types = "response",
+        predict_types = c("response", "prob"),
         param_set = ps,
         properties = c("weights", "twoclass", "multiclass")
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+    .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
-      if(!is.null(pars$alpha) && !is.null(pars$mincriterion)) {
-        warning("Because you set the mincriterion parameter, it will overwrite the parameter alpha.")
-      }
-      if(!is.null(pars$alpha) && !is.null(pars$logmincriterion)) {
-        warning("Because you set the logmincriterion parameter, it will overwrite the parameter alpha.")
-      }
-      if(!is.null(pars$mincriterion) && !is.null(pars$logmincriterion)) {
-        warning("Because you set the logmincriterion parameter, it will overwrite the parameter mincriterion.")
-      }
       f = task$formula()
       data = task$data()
-      if (is.null(task$weights)) {
-        mlr3misc::invoke(partykit::ctree, formula = f, data = data, .args = pars)
-      } else {
-        weights = task$weights
-        mlr3misc::invoke(partykit::ctree, formula = f, data = data, weights = weights, .args = pars)
+
+      if ("weights" %in% task$properties) {
+        pars$weights = task$weights$weight
       }
+
+      invoke(partykit::ctree, formula = f, data = data, .args = pars)
     },
 
-    predict_internal = function(task) {
-      pars = self$param_set$get_values(tags = "predict") # get parameters with tag "predict"
+    .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
 
-      p = mlr3misc::invoke(predict, self$model, newdata = newdata, .args = pars)
-
-      # Return a prediction object with PredictionClassif$new() or PredictionRegr$new()
-      PredictionClassif$new(task = task, response = p)
+      if (self$predict_type == "response") {
+        response = invoke(predict, self$model, newdata = newdata, type = "response")
+        PredictionClassif$new(task = task, response = response)
+      } else {
+        prob = invoke(predict, self$model, newdata = newdata, type = "prob")
+        PredictionClassif$new(task = task, prob = prob)
+      }
     }
   )
 )
