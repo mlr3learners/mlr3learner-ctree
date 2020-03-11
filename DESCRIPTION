@@ -1,13 +1,16 @@
 Package: mlr3learners.ctree
-Title: Wrapper for the ctree learner for use in mlr3
+Title: ctree learner from partykit package for 'mlr3'
 Version: 0.1.0
 Authors@R:
     c(person(given = "Marvin",
              family = "Böcker",
              role = "cre",
-             email = "marvin.boecker@tu-dortmund.de")
-      )
-Description: mlr3 learner for 'ctree' from the 'partykit' package.
+             email = "marvin.boecker@tu-dortmund.de"),
+      person(given = "Marc",
+             family = "Becker",
+             role = "aut",
+             email = "marcbecker@posteo.de"))
+Description: ctree learner from partykit package for 'mlr3'.
 License: LGPL-3
 Depends:
     R (>= 3.1.0)

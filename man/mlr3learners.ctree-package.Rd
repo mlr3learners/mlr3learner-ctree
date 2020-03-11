@@ -4,11 +4,16 @@
 \name{mlr3learners.ctree-package}
 \alias{mlr3learners.ctree}
 \alias{mlr3learners.ctree-package}
-\title{mlr3learners.ctree: Wrapper for the ctree learner for use in mlr3}
+\title{mlr3learners.ctree: ctree learner from partykit package for 'mlr3'}
 \description{
-mlr3 learner for 'ctree' from the 'partykit' package.
+ctree learner from partykit package for 'mlr3'.
 }
 \author{
 \strong{Maintainer}: Marvin Böcker \email{marvin.boecker@tu-dortmund.de}
+
+Authors:
+\itemize{
+  \item Marc Becker \email{marcbecker@posteo.de}
+}
 
 }

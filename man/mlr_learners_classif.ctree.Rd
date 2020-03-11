@@ -5,18 +5,37 @@
 \alias{LearnerClassifCTree}
 \title{Classification Conditional Inference Tree Learner}
 \description{
+Classification conditional inference tree learner.
 Calls \code{\link[partykit:ctree]{partykit::ctree()}} from package \CRANpkg{partykit}.
 }
 \section{Dictionary}{
 
-This \link[mlr3:LearnerClassif]{mlr3::LearnerClassif} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link[mlr3:mlr_learners]{mlr3::mlr_learners} or with the associated sugar function \code{\link[mlr3:lrn]{mlr3::lrn()}}:\preformatted{mlr_learners$get("classif.ctree")
+This [Learner] can be instantiated via the [dictionary][mlr3misc::Dictionary] [mlr_learners] or with the associated sugar function [lrn()]:\preformatted{mlr_learners$get("classif.ctree")
 lrn("classif.ctree")
+``
+
+[Learner]: R:Learner
+[mlr3misc::Dictionary]: R:mlr3misc::Dictionary
+[mlr_learners]: R:mlr_learners
+[lrn()]: R:lrn()
 }
 }
 
+\examples{
+if (requireNamespace("partykit")) {
+  learner = mlr3::lrn("classif.ctree")
+  print(learner)
+
+  # available parameters:
+  learner$param_set$ids()
+}
+}
 \references{
 \cite{mlr3learners.ctree}{partykit1}
 \cite{mlr3learners.ctree}{partykit2}
+}
+\seealso{
+\link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
 }
 \section{Super classes}{
 \code{\link[mlr3:Learner]{mlr3::Learner}} -> \code{\link[mlr3:LearnerClassif]{mlr3::LearnerClassif}} -> \code{LearnerClassifCTree}
