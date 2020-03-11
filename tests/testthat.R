@@ -1,4 +1,4 @@
 library(testthat)
-library(mlr3learner.ctree)
+library(mlr3learners.ctree)
 
-test_check("mlr3learner.ctree")
+test_check("mlr3learners.ctree")

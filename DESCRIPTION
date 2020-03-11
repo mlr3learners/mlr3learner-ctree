@@ -1,4 +1,4 @@
-Package: mlr3learner.ctree
+Package: mlr3learners.ctree
 Title: Wrapper for the ctree learner for use in mlr3
 Version: 0.1.0
 Authors@R:
@@ -12,22 +12,16 @@ License: LGPL-3
 Depends:
     R (>= 3.1.0)
 Imports:
-    checkmate,
+    mlr3misc,
     data.table,
     mlr3,
-    mlr3misc,
     paradox,
-    partykit, 
+    partykit,
     R6
 Suggests:
-    testthat,
-    rmarkdown,
-    randomForest
-Remotes:
-    mlr-org/mlr3,
-    mlr-org/mlr3misc,
-    mlr-org/paradox
+    testthat
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
+RdMacros: mlr3misc

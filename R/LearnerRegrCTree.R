@@ -1,19 +1,26 @@
 #' @title Regression Conditional Inference Tree Learner
 #'
-#' @format [R6::R6Class] inheriting from [LearnerRegr].
+#' @name mlr_learners_regr.ctree
 #'
 #' @description
-#' MISSING.
+#' Calls [partykit::ctree()] from package \CRANpkg{partykit}.
+#'
+#' @section Dictionary:
+#' This [mlr3::LearnerRegr] can be instantiated via the [dictionary][mlr3misc::Dictionary] [mlr3::mlr_learners] or with the associated sugar function [mlr3::lrn()]:
+#' ```
+#' mlr_learners$get("regr.ctree")
+#' lrn("regr.ctree")
+#' ```
 #'
 #' @references
-#' Breiman, L. (2001).
-#' Random Forests
-#' Machine Learning
-#' \url{https://doi.org/10.1023/A:1010933404324}
+#' \cite{mlr3learners.ctree}{partykit1}
+#' \cite{mlr3learners.ctree}{partykit2}
 #'
 #' @export
 LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
   public = list(
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new( # parameter set using the paradox package
         params = list(
@@ -28,16 +35,18 @@ LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
         param_set = ps,
         properties = c("weights")
       )
-    },
+    }
+  ),
 
-    train_internal = function(task) {
+  private = list(
+    .train = function(task) {
       # pars = self$param_set$get_values(tags = "train")
       f = task$formula()
       data = task$data()
       mlr3misc::invoke(partykit::ctree, formula = f, data = data)
     },
 
-    predict_internal = function(task) {
+    .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict") # get parameters with tag "predict"
       newdata = task$data(cols = task$feature_names)
 
