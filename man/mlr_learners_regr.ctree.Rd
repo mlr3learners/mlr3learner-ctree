@@ -4,7 +4,6 @@
 \alias{mlr_learners_regr.ctree}
 \alias{LearnerRegrCTree}
 \title{Regression Conditional Inference Tree Learner}
-\description{
 Regression conditional inference tree learner.
 Calls \code{\link[partykit:ctree]{partykit::ctree()}} from package \CRANpkg{partykit}.
 }

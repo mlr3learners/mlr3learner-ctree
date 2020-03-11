@@ -4,6 +4,7 @@
 .ignore
 .editorconfig
 .gitignore
+.git
 ^\.travis\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
