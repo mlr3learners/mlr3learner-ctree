@@ -4,6 +4,7 @@
 \alias{mlr_learners_regr.ctree}
 \alias{LearnerRegrCTree}
 \title{Regression Conditional Inference Tree Learner}
+\description{
 Regression conditional inference tree learner.
 Calls \code{\link[partykit:ctree]{partykit::ctree()}} from package \CRANpkg{partykit}.
 }
@@ -30,15 +31,8 @@ if (requireNamespace("partykit")) {
 }
 }
 \references{
-Torsten Hothorn, Achim Zeileis (2015).
-partykit: A Modular Toolkit for Recursive Partytioning in R.
-Journal of Machine Learning Research, 16, 3905-3909.
-\url{http://jmlr.org/papers/v16/hothorn15a.html}
-
-Torsten Hothorn, Kurt Hornik and Achim Zeileis (2006).
-Unbiased Recursive Partitioning: A Conditional Inference Framework.
-Journal of Computational and Graphical Statistics, 15(3), 651--674,
-DOI: 10.1198/106186006X133933
+\cite{mlr3learners.ctree}{partykit1}
+\cite{mlr3learners.ctree}{partykit2}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
