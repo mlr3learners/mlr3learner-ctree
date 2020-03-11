@@ -20,49 +20,47 @@
 LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
   public = list(
     initialize = function() {
-      ps = ParamSet$new( # parameter set using the paradox package
+      ps = ParamSet$new(
         params = list(
-          ParamFct$new("teststat", levels = c("quadratic", "maximum"), default = "quadratic", tags = c("train")),
-          ParamFct$new("splitstat", levels = c("quadratic", "maximum"), default = "quadratic", tags = c("train")),
-          ParamLgl$new("splittest", default = FALSE, tags = c("train")),
-          ParamFct$new("testtype", levels = c("Bonferroni", "MonteCarlo", "Univariate", "Teststatistic"), default = "Bonferroni", tags = c("train")),
-          #ParamUty$new("pargs"),
-          #ParamInt$new("nmax"),
-          ParamDbl$new("alpha", lower = 0, upper = 1, default = 0.05, tags = c("train")),
-          ParamDbl$new("mincriterion", lower = 0, tags = c("train")),
-          ParamDbl$new("logmincriterion", tags = c("train")),
-          ParamDbl$new("minsplit", default = 20, tags = c("train")),
-          ParamDbl$new("minbucket", default = 7, tags = c("train")),
-          ParamDbl$new("minprob", default = 0.01, tags = c("train")),
-          ParamLgl$new("stump", default = FALSE, tags = c("train")),
-          ParamLgl$new("lookahead", default = FALSE, tags = c("train")),
-          ParamLgl$new("MIA", default = FALSE, tags = c("train")),
-          ParamInt$new("nresample", default = 9999, tags = c("train")),
-          ParamDbl$new("tol", lower = 0, default = 1.490116e-08, tags = c("train")),
-          ParamInt$new("maxsurrogate", default = 0, tags = c("train")),
-          ParamLgl$new("numsurrogate", default = FALSE, tags = c("train")),
-          ParamInt$new("mtry", lower = 0, special_vals = list(Inf), default = Inf, tags = c("train")),
-          ParamInt$new("maxdepth", lower = 0, special_vals = list(Inf), default = Inf, tags = c("train")),
-          ParamLgl$new("multiway", default = FALSE, tags = c("train")),
-          ParamInt$new("splittry", lower = 0, default = 2, tags = c("train")),
-          ParamLgl$new("intersplit", default = FALSE, tags = c("train")),
-          ParamLgl$new("majority", default = FALSE, tags = c("train")),
-          #ParamLgl$new("caseweights", default = FALSE),
-          ParamUty$new("applyfun", tags = c("train")),
-          ParamInt$new("cores", default = FALSE, special_vals = list(FALSE), tags = c("train")),
-          ParamLgl$new("saveinfo", default = TRUE, tags = c("train")),
-          ParamLgl$new("update", default = FALSE, tags = c("train")),
-          ParamLgl$new("splitflavour", default = FALSE, tags = c("train"))
+          ParamFct$new("teststat", levels = c("quadratic", "maximum"), default = "quadratic", tags = "train"),
+          ParamFct$new("splitstat", levels = c("quadratic", "maximum"), default = "quadratic", tags = "train"),
+          ParamLgl$new("splittest", default = FALSE, tags = "train"),
+          ParamFct$new("testtype", levels = c("Bonferroni", "MonteCarlo", "Univariate", "Teststatistic"), default = "Bonferroni", tags = "train"),
+          ParamUty$new("nmax", tags = "train"),
+          ParamDbl$new("alpha", lower = 0, upper = 1, default = 0.05, tags = "train"),
+          ParamDbl$new("mincriterion", lower = 0, upper = 1, default = 0.95, tags = "train"),
+          ParamDbl$new("logmincriterion", tags = "train"),
+          ParamInt$new("minsplit", lower = 1L, default = 20L, tags = "train"),
+          ParamInt$new("minbucket", lower = 1L, default = 7L, tags = "train"),
+          ParamDbl$new("minprob", lower = 0, default = 0.01, tags = "train"),
+          ParamLgl$new("stump", default = FALSE, tags = "train"),
+          ParamLgl$new("lookahead", default = FALSE, tags = "train"),
+          ParamLgl$new("MIA", default = FALSE, tags = "train"),
+          ParamInt$new("nresample", lower = 1L, default = 9999L, tags = "train"),
+          ParamDbl$new("tol", lower = 0, tags = "train"),
+          ParamInt$new("maxsurrogate", lower = 0L, default = 0L, tags = "train"),
+          ParamLgl$new("numsurrogate", default = FALSE, tags = "train"),
+          ParamInt$new("mtry", lower = 0L, special_vals = list(Inf), default = Inf, tags = "train"),
+          ParamInt$new("maxdepth", lower = 0L, special_vals = list(Inf), default = Inf, tags = "train"),
+          ParamLgl$new("multiway", default = FALSE, tags = "train"),
+          ParamInt$new("splittry", lower = 0L, default = 2L, tags = "train"),
+          ParamLgl$new("intersplit", default = FALSE, tags = "train"),
+          ParamLgl$new("majority", default = FALSE, tags = "train"),
+          ParamLgl$new("caseweights", default = FALSE, tags = "train"),
+          ParamUty$new("applyfun", tags = "train"),
+          ParamInt$new("cores", special_vals = list(NULL), default = NULL, tags = "train"),
+          ParamLgl$new("saveinfo", default = TRUE, tags = "train"),
+          ParamLgl$new("update", default = FALSE, tags = "train"),
+          ParamLgl$new("splitflavour", default = FALSE, tags = "train")
         )
       )
-
       ps$add_dep("nresample", "testtype", CondEqual$new("MonteCarlo"))
 
       super$initialize(
         id = "regr.ctree",
         packages = "partykit",
         feature_types = c("numeric", "factor", "ordered"),
-        predict_types = c("response"),
+        predict_types = "response",
         param_set = ps,
         properties = c("weights")
       )
