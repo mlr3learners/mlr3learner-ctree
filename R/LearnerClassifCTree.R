@@ -1,9 +1,13 @@
 #' @title Classification Conditional Inference Tree Learner
 #'
-#' @format [R6::R6Class] inheriting from [LearnerClassif].
+#' @name mlr_learners_classif.ctree
 #'
 #' @description
-#' A wrapper around ctree (partykit) to use it within mlr3.
+#' Classification conditional inference tree learner.
+#' Calls [partykit::ctree()] from package \CRANpkg{partykit}.
+#'
+#' @templateVar id classif.ctree
+#' @template section_dictionary_learner
 #'
 #' @references
 #' Torsten Hothorn, Achim Zeileis (2015).
@@ -17,8 +21,13 @@
 #' DOI: 10.1198/106186006X133933
 #'
 #' @export
+#' @template seealso_learner
+#' @template example
 LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(
         params = list(
@@ -62,7 +71,8 @@ LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
         feature_types = c("numeric", "factor", "ordered"),
         predict_types = c("response", "prob"),
         param_set = ps,
-        properties = c("weights", "twoclass", "multiclass")
+        properties = c("weights", "twoclass", "multiclass"),
+        man = "mlr3learners.ctree::mlr_learners_classif.ctree"
       )
     }
   ),

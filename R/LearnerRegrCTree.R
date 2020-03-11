@@ -1,9 +1,13 @@
 #' @title Regression Conditional Inference Tree Learner
 #'
-#' @format [R6::R6Class] inheriting from [LearnerRegr].
+#' @name mlr_learners_regr.ctree
 #'
 #' @description
-#' A wrapper around ctree (partykit) to use it within mlr3.
+#' Regression conditional inference tree learner.
+#' Calls [partykit::ctree()] from package \CRANpkg{partykit}.
+#'
+#' @templateVar id regr.ctree
+#' @template section_dictionary_learner
 #'
 #' @references
 #' Torsten Hothorn, Achim Zeileis (2015).
@@ -17,8 +21,13 @@
 #' DOI: 10.1198/106186006X133933
 #'
 #' @export
+#' @template seealso_learner
+#' @template example
 LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
   public = list(
+
+    #' @description
+    #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(
         params = list(
@@ -62,7 +71,8 @@ LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
         feature_types = c("numeric", "factor", "ordered"),
         predict_types = "response",
         param_set = ps,
-        properties = c("weights")
+        properties = c("weights"),
+        man = "mlr3learners.ctree::mlr_learners_regr.ctree"
       )
     }
   ),
