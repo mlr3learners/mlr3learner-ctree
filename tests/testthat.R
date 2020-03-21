@@ -1,4 +1,4 @@
 library(testthat)
-library(mlr3learners.ctree)
+library(mlr3learners.partykit)
 
-test_check("mlr3learners.ctree")
+test_check("mlr3learners.partykit")
