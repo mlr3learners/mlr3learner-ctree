@@ -65,7 +65,7 @@ LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
         predict_types = c("response", "prob"),
         param_set = ps,
         properties = c("weights", "twoclass", "multiclass"),
-        man = "mlr3learners.ctree::mlr_learners_classif.ctree"
+        man = "mlr3learners.partykit::mlr_learners_classif.ctree"
       )
     }
   ),

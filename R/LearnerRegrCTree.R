@@ -65,7 +65,7 @@ LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
         predict_types = "response",
         param_set = ps,
         properties = c("weights"),
-        man = "mlr3learners.ctree::mlr_learners_regr.ctree"
+        man = "mlr3learners.partykit::mlr_learners_regr.ctree"
       )
     }
   ),
