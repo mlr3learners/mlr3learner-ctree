@@ -1,5 +1,5 @@
-Package: mlr3learners.ctree
-Title: ctree learner from partykit package for 'mlr3'
+Package: mlr3learners.partykit
+Title: Learners from partykit package for 'mlr3'
 Version: 0.1.0
 Authors@R:
     c(person(given = "Marvin",
@@ -10,7 +10,7 @@ Authors@R:
              family = "Becker",
              role = "aut",
              email = "marcbecker@posteo.de"))
-Description: ctree learner from partykit package for 'mlr3'.
+Description: Adds `ctree()` from the partykit package to mlr3.
 License: LGPL-3
 Depends:
     R (>= 3.1.0)
@@ -28,5 +28,5 @@ Suggests:
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 RdMacros: mlr3misc
