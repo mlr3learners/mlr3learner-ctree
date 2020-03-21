@@ -10,14 +10,8 @@ Calls \code{\link[partykit:ctree]{partykit::ctree()}} from package \CRANpkg{part
 }
 \section{Dictionary}{
 
-This [Learner] can be instantiated via the [dictionary][mlr3misc::Dictionary] [mlr_learners] or with the associated sugar function [lrn()]:\preformatted{mlr_learners$get("classif.ctree")
+This \link{Learner} can be instantiated via the \link[mlr3misc:Dictionary]{dictionary} \link{mlr_learners} or with the associated sugar function \code{\link[=lrn]{lrn()}}:\preformatted{mlr_learners$get("classif.ctree")
 lrn("classif.ctree")
-``
-
-[Learner]: R:Learner
-[mlr3misc::Dictionary]: R:mlr3misc::Dictionary
-[mlr_learners]: R:mlr_learners
-[lrn()]: R:lrn()
 }
 }
 
