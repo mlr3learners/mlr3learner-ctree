@@ -10,8 +10,8 @@
 #' @template section_dictionary_learner
 #'
 #' @references
-#' \cite{mlr3learners.ctree}{partykit1}
-#' \cite{mlr3learners.ctree}{partykit2}
+#' \cite{mlr3learners.partykit}{partykit1}
+#' \cite{mlr3learners.partykit}{partykit2}
 #'
 #' @export
 #' @template seealso_learner

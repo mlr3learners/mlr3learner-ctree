@@ -31,8 +31,8 @@ if (requireNamespace("partykit")) {
 }
 }
 \references{
-\cite{mlr3learners.ctree}{partykit1}
-\cite{mlr3learners.ctree}{partykit2}
+\cite{mlr3learners.partykit}{partykit1}
+\cite{mlr3learners.partykit}{partykit2}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
