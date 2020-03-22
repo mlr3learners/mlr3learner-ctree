@@ -24,6 +24,7 @@ Imports:
     mlr3,
     paradox,
     partykit,
+    sandwich,
     R6,
     checkmate
 Suggests:
