@@ -53,7 +53,7 @@ LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
           ParamInt$new("cores", special_vals = list(NULL), default = NULL, tags = "train"),
           ParamLgl$new("saveinfo", default = TRUE, tags = "train"),
           ParamLgl$new("update", default = FALSE, tags = "train"),
-          ParamLgl$new("splitflavour", default = FALSE, tags = "train")
+          ParamFct$new("splitflavour", default = "ctree", levels = c("ctree", "exhaustive"), tags = c("train", "control"))
         )
       )
       ps$add_dep("nresample", "testtype", CondEqual$new("MonteCarlo"))
@@ -61,10 +61,10 @@ LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
       super$initialize(
         id = "regr.ctree",
         packages = "partykit",
-        feature_types = c("numeric", "factor", "ordered"),
+        feature_types = c("integer", "numeric", "factor", "ordered"),
         predict_types = "response",
         param_set = ps,
-        properties = c("weights"),
+        properties = "weights",
         man = "mlr3learners.partykit::mlr_learners_regr.ctree"
       )
     }

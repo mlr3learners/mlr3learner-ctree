@@ -9,8 +9,12 @@ Authors@R:
       person(given = "Marc",
              family = "Becker",
              role = "aut",
-             email = "marcbecker@posteo.de"))
-Description: Adds `ctree()` from the partykit package to mlr3.
+             email = "marcbecker@posteo.de"),
+      person(given = "Lennart",
+             family = "Schneider",
+             role = "aut",
+             email = "lennart.sch@web.de"))
+Description: Adds `ctree()` , `cforest()`, and `mob()` from the partykit package to mlr3.
 License: LGPL-3
 Depends:
     R (>= 3.1.0)
@@ -20,9 +24,9 @@ Imports:
     mlr3,
     paradox,
     partykit,
-    R6
+    R6,
+    checkmate
 Suggests:
-    checkmate,
     bibtex,
     testthat
 Encoding: UTF-8
