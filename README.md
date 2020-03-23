@@ -8,7 +8,7 @@
 
 <!-- badges: end -->
 
-Adds `ctree()` from the {partykit} package to {mlr3}.
+Adds `ctree()` and `cforest()` from the {partykit} package to {mlr3}.
 
 Install the latest release of the package via 
 

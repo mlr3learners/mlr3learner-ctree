@@ -26,57 +26,65 @@ LearnerClassifCForest = R6Class("LearnerClassifCForest", inherit = LearnerClassi
         # missing: weights (see bottom), subset, offset, cluster, strata (see FIXME: below), na.action, ytrafo, scores
         ParamInt$new("ntree", default = 500L, lower = 1L, tags = "train"),
         # replace and fraction go in perturb (named list)
-        ParamLgl$new("replace", default = FALSE, tags = c("train", "perturb")),
-        ParamDbl$new("fraction", default = 0.632, lower = 0, upper = 1, tags = c("train", "perturb")),
+        ParamLgl$new("replace", default = FALSE, tags = "train"),
+        ParamDbl$new("fraction", default = 0.632, lower = 0, upper = 1, tags = "train"),
         ParamInt$new("mtry", lower = 0L, special_vals = list(Inf), tags = "train"), # actually has an adaptive default of "ceiling(sqrt(nvar))"
-        ParamUty$new("applyfun", tags = "train"),
-        ParamInt$new("cores", default = NULL, special_vals = list(NULL), tags = "train"),
+        ParamUty$new("applyfun", tags = c("train", "importance")),
+        ParamInt$new("cores", default = NULL, special_vals = list(NULL), tags = c("train", "importance")),
         ParamLgl$new("trace", default = FALSE, tags = "train"),
 
 
         # all in ctree_control(); missing: mtry, applyfun, cores (see above, passed directly)
-        ParamFct$new("teststat", default = "quadratic", levels = c("quadratic", "maximum"), tags = c("train", "control")),
-        ParamFct$new("splitstat", default = "quadratic", levels = c("quadratic", "maximum"), tags = c("train", "control")),
-        ParamLgl$new("splittest", default = FALSE, tags = c("train", "control")),
-        ParamFct$new("testtype", default = "Univariate", levels = c("Bonferroni", "MonteCarlo", "Univariate", "Teststatistic"), tags = c("train", "control")),
-        ParamUty$new("nmax", tags = c("train", "control")),
+        ParamFct$new("teststat", default = "quadratic", levels = c("quadratic", "maximum"), tags = "train"),
+        ParamFct$new("splitstat", default = "quadratic", levels = c("quadratic", "maximum"), tags = "train"),
+        ParamLgl$new("splittest", default = FALSE, tags = "train"),
+        ParamFct$new("testtype", default = "Univariate", levels = c("Bonferroni", "MonteCarlo", "Univariate", "Teststatistic"), tags = "train"),
+        ParamUty$new("nmax", tags = "train"),
 
         # pargs arguments as a list for GenzBretz() within ctree_control; currently not used
-        #ParamInt$new("maxpts", default = 25000L, lower = 1L, tags = c("train", "control")),
-        #ParamDbl$new("abseps", default = 0.001, lower = 0, tags = c("train", "control")),
-        #ParamDbl$new("releps", default = 0, tags = c("train", "control")),
+        #ParamInt$new("maxpts", default = 25000L, lower = 1L, tags = "train"),
+        #ParamDbl$new("abseps", default = 0.001, lower = 0, tags = "train"),
+        #ParamDbl$new("releps", default = 0, tags = "train"),
 
-        ParamDbl$new("alpha", default = 0.05, lower = 0, upper = 1, tags = c("train", "control")),
-        ParamDbl$new("mincriterion", default = 0, lower = 0, upper = 1, tags = c("train", "control")),
-        ParamDbl$new("logmincriterion", default = 0, tags = c("train", "control")),
-        ParamInt$new("minsplit", lower = 1L, default = 20L, tags = c("train", "control")),
-        ParamInt$new("minbucket", lower = 1L, default = 7L, tags = c("train", "control")),
-        ParamDbl$new("minprob", default = 0.01, lower = 0, upper = 1, tags = c("train", "control")),
-        ParamLgl$new("stump", default = FALSE, tags = c("train", "control")),
-        ParamLgl$new("lookahead", default = FALSE, tags = c("train", "control")),
-        ParamLgl$new("MIA", default = FALSE, tags = c("train", "control")),
-        ParamInt$new("nresample", default = 9999L, lower = 1L, tags = c("train", "control")),
-        ParamDbl$new("tol", default = sqrt(.Machine$double.eps), lower = 0, tags = c("train", "control")),
-        ParamInt$new("maxsurrogate", default = 0L, lower = 0L, tags = c("train", "control")),
-        ParamLgl$new("numsurrogate", default = FALSE, tags = c("train", "control")),
-        ParamInt$new("maxdepth", default = Inf, lower = 0L, special_vals = list(Inf), tags = c("train", "control")),
-        ParamLgl$new("multiway", default = FALSE, tags = c("train", "control")),
-        ParamInt$new("splittry", default = 2L, lower = 0L, tags = c("train", "control")),
-        ParamLgl$new("intersplit", default = FALSE, tags = c("train", "control")),
-        ParamLgl$new("majority", default = FALSE, tags = c("train", "control")),
-        ParamLgl$new("caseweights", default = TRUE, tags = c("train", "control")),
-        ParamLgl$new("saveinfo", default = FALSE, tags = c("train", "control")),
-        ParamLgl$new("update", default = FALSE, tags = c("train", "control")),
-        ParamFct$new("splitflavour", default = "ctree", levels = c("ctree", "exhaustive"), tags = c("train", "control")),
+        ParamDbl$new("alpha", default = 0.05, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("mincriterion", default = 0, lower = 0, upper = 1, tags = "train"),
+        ParamDbl$new("logmincriterion", default = 0, tags = "train"),
+        ParamInt$new("minsplit", lower = 1L, default = 20L, tags = "train"),
+        ParamInt$new("minbucket", lower = 1L, default = 7L, tags = "train"),
+        ParamDbl$new("minprob", default = 0.01, lower = 0, upper = 1, tags = "train"),
+        ParamLgl$new("stump", default = FALSE, tags = "train"),
+        ParamLgl$new("lookahead", default = FALSE, tags = "train"),
+        ParamLgl$new("MIA", default = FALSE, tags = "train"),
+        ParamInt$new("nresample", default = 9999L, lower = 1L, tags = "train"),
+        ParamDbl$new("tol", default = sqrt(.Machine$double.eps), lower = 0, tags = "train"),
+        ParamInt$new("maxsurrogate", default = 0L, lower = 0L, tags = "train"),
+        ParamLgl$new("numsurrogate", default = FALSE, tags = "train"),
+        ParamInt$new("maxdepth", default = Inf, lower = 0L, special_vals = list(Inf), tags = "train"),
+        ParamLgl$new("multiway", default = FALSE, tags = "train"),
+        ParamInt$new("splittry", default = 2L, lower = 0L, tags = "train"),
+        ParamLgl$new("intersplit", default = FALSE, tags = "train"),
+        ParamLgl$new("majority", default = FALSE, tags = "train"),
+        ParamLgl$new("caseweights", default = TRUE, tags = "train"),
+        ParamLgl$new("saveinfo", default = FALSE, tags = "train"),
+        ParamLgl$new("update", default = FALSE, tags = "train"),
+        ParamFct$new("splitflavour", default = "ctree", levels = c("ctree", "exhaustive"), tags = "train"),
 
         # predict; missing FUN and simplify (not needed here)
-        ParamLgl$new("OOB", default = FALSE, tags = "predict"),
+        ParamLgl$new("OOB", default = FALSE, tags = c("predict", "importance")),
         ParamLgl$new("simplify", default = TRUE, tags = "predict"),
-        ParamLgl$new("scale", default = TRUE, tags = "predict")
+        ParamLgl$new("scale", default = TRUE, tags = "predict"),
+
+        # importance; OOB see predict, applyfun, cores see train
+        ParamInt$new("nperm", default = 1L, lower = 0L, tags = "importance"),
+        ParamFct$new("risk", default = "loglik", levels = c("loglik", "misclassification"), tags = "importance"),
+        ParamLgl$new("conditional", default = FALSE, tags = "importance"),
+        ParamDbl$new("threshold", default = 0.2, tags = "importance")
         )
       )
 
       ps$add_dep("nresample", on = "testtype", cond = CondEqual$new("MonteCarlo"))
+      ps$add_dep("nperm", on = "conditional", cond = CondEqual$new(TRUE))
+      ps$add_dep("threshold", on = "conditional", cond = CondEqual$new(TRUE))
 
       # set the cforest specific ctree_control parameters
       ps$values$teststat = "quadratic"
@@ -99,12 +107,13 @@ LearnerClassifCForest = R6Class("LearnerClassifCForest", inherit = LearnerClassi
     # #' The importance scores are calculated using `partykit::varimp()`.
     # #'
     # #' @return Named `numeric()`.
-    # FIXME: argument checking here, move the params into ps?; Achim bug fix needed (sometimes varimp returns a vector of length 0)
-    #importance = function(nperm = 1L, OOB = TRUE, risk = "loglik", conditional = FALSE, threshold = .2, applyfun = NULL, cores = NULL, ...) {
+    # # FIXME: needs fix in partykit, WIP
+    #importance = function() {
     #  if (is.null(self$model)) {
     #    stopf("No model stored")
     #  }
-    #  sort(partykit::varimp(object = self$model, nperm = nperm, OOB = OOB, risk = risk, conditional = conditional, threshold = threshold, applyfun = applyfun, cores = cores, ...), decreasing = TRUE)
+    #  pars = self$param_set$get_values(tags = "importance")
+    #  sort(invoke(partykit::varimp, object = self$model, .args = pars), decreasing = TRUE)
     #},
 
     #' @description
@@ -114,19 +123,19 @@ LearnerClassifCForest = R6Class("LearnerClassifCForest", inherit = LearnerClassi
     oob_error = function() {
       preds = invoke(predict, object = self$model, newdata = NULL, type = "response", OOB = TRUE, FUN = NULL, simplify = TRUE, scale = TRUE)
       confusion = table(self$model$data[[as.character(attr(self$model$data, which = "terms")[[2L]])]], preds)
-      nobs = sum(confusion)
+      N = sum(confusion)
       diag(confusion) = 0
-      sum(confusion) / nobs
+      sum(confusion) / N
     }
   ),
 
   private = list(
     .train = function(task) {
-      # perturb parameters need special handling; FIXME: easier way?
       pars = self$param_set$get_values(tags = "train")
-      pars_control = self$param_set$get_values(tags = "control")
+      pars_control = pars[which(names(pars) %in% setdiff(formalArgs(partykit::ctree_control), c("mtry", "applyfun", "cores")))] # see ctree_control
       pars = pars[names(pars) %nin% c("replace", "fraction", names(pars_control))]
       control = invoke(partykit::ctree_control, .args = pars_control)
+      # perturb parameters need special handling; FIXME: easier way?
       perturb = list(replace = FALSE, fraction = 0.632)
       if (!is.null(self$param_set$values$replace)) perturb$replace = self$param_set$values$replace
       if (!is.null(self$param_set$values$fraction)) perturb$fraction = self$param_set$values$fraction
