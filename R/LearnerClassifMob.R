@@ -14,6 +14,7 @@
 #' @references
 #' \cite{mlr3learners.partykit}{partykit1}
 #' \cite{mlr3learners.partykit}{partykit2}
+#' \cite{mlr3learners.partykit}{partykit3}
 #'
 #' @export
 #' @template seealso_learner
