@@ -14,7 +14,7 @@ Authors@R:
              family = "Schneider",
              role = "aut",
              email = "lennart.sch@web.de"))
-Description: Adds `ctree()` , and `cforest()` from the partykit package to mlr3.
+Description: Adds `ctree()`, and `cforest()` from the partykit package to mlr3.
 License: LGPL-3
 Depends:
     R (>= 3.1.0)

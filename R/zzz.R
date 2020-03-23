@@ -15,6 +15,4 @@
   x$add("regr.ctree", LearnerRegrCTree)
   x$add("classif.cforest", LearnerClassifCForest)
   x$add("regr.cforest", LearnerRegrCForest)
-  x$add("classif.mob", LearnerClassifMob)
-  x$add("regr.mob", LearnerRegrMob)
 } # nocov end
