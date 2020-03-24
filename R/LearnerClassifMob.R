@@ -26,8 +26,8 @@ LearnerClassifMob = R6Class("LearnerClassifMob", inherit = LearnerClassif,
     initialize = function() {
       ps = ParamSet$new(list(
         # missing: subset, na.action, weights (see bottom), offset, cluster
-        ParamUty$new("rhs", custom_check = check_character, tags = "train"),
-        ParamUty$new("fit", custom_check = function(x) check_function(x, args = c("y", "x", "start", "weights", "offset", "...")), tags = "train"),
+        ParamUty$new("rhs", custom_check = checkmate::check_character, tags = "train"),
+        ParamUty$new("fit", custom_check = function(x) checkmate::check_function(x, args = c("y", "x", "start", "weights", "offset", "...")), tags = "train"),
         # all in mob_control()
         ParamDbl$new("alpha", default = 0.05, lower = 0, upper = 1, tags = "train"),
         ParamLgl$new("bonferroni", default = TRUE, tags = "train"),
@@ -57,10 +57,10 @@ LearnerClassifMob = R6Class("LearnerClassifMob", inherit = LearnerClassif,
         ParamUty$new("applyfun", tags = "train"),
         ParamInt$new("cores", default = NULL, special_vals = list(NULL), tags = "train"),
         # additional arguments passed to fitting function
-        ParamUty$new("additional", custom_check = check_list, tags = "train"),
+        ParamUty$new("additional", custom_check = checkmate::check_list, tags = "train"),
         # the predict function depends on the predict method of the fitting function itself and can be passed via type, see predict.modelparty
         # most fitting functions should not need anything else than the model itself, the newdata, the original task and a predict type
-        ParamUty$new("predict_fun", custom_check = function(x) check_function(x, args = c("object", "newdata", "task", ".type")), tags = "predict")
+        ParamUty$new("predict_fun", custom_check = function(x) checkmate::check_function(x, args = c("object", "newdata", "task", ".type")), tags = "predict")
         )
       )
 
@@ -84,14 +84,14 @@ LearnerClassifMob = R6Class("LearnerClassifMob", inherit = LearnerClassif,
       formula = task$formula(self$param_set$values$rhs)
       pars = self$param_set$get_values(tags = "train")
       pars_control = pars[which(names(pars) %in% formalArgs(partykit::mob_control))] 
-      pars_additional = self$param_set$get_values(tags = "additional")
-      pars = pars[names(pars) %nin% c("rhs", names(pars_control), names(pars_additional))]
+      pars_additional = self$param_set$values$additional
+      pars = pars[names(pars) %nin% c("rhs", names(pars_control), "additional")]
       control = invoke(partykit::mob_control, .args = pars_control)
       if ("weights" %in% task$properties) { # weights are handled here
         pars = insert_named(pars, list(weights = task$weights$weight))
       }
       # append the additional parameters to be passed to the fitting function
-      pars = append(pars, unlist(unname(pars_additional)))
+      pars = append(pars, pars_additional)
 
       # FIXME: contrasts?
       invoke(partykit::mob,

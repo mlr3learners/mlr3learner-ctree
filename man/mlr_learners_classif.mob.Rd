@@ -7,8 +7,7 @@
 \description{
 Classification model-based recursive partitioning.
 Calls \code{\link[partykit:mob]{partykit::mob()}} from package \CRANpkg{partykit}.
-FIXME: this learner is not straightforward to use; needs gallery post or
-detailed description.
+FIXME: this learner is not straightforward to use; needs gallery post or detailed description.
 }
 \section{Dictionary}{
 
@@ -29,6 +28,7 @@ if (requireNamespace("partykit")) {
 \references{
 \cite{mlr3learners.partykit}{partykit1}
 \cite{mlr3learners.partykit}{partykit2}
+\cite{mlr3learners.partykit}{partykit3}
 }
 \seealso{
 \link[mlr3misc:Dictionary]{Dictionary} of \link[mlr3:Learner]{Learners}: \link[mlr3:mlr_learners]{mlr3::mlr_learners}
