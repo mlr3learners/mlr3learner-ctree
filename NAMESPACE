@@ -2,10 +2,8 @@
 
 export(LearnerClassifCForest)
 export(LearnerClassifCTree)
-export(LearnerClassifMob)
 export(LearnerRegrCForest)
 export(LearnerRegrCTree)
-export(LearnerRegrMob)
 import(data.table)
 import(mlr3misc)
 import(paradox)

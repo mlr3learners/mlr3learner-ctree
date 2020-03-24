@@ -6,7 +6,7 @@
 \alias{mlr3learners.partykit-package}
 \title{mlr3learners.partykit: Learners from partykit package for 'mlr3'}
 \description{
-Adds `ctree()` , `cforest()`, and `mob()` from the partykit package to mlr3.
+Adds `ctree()`, and `cforest()` from the partykit package to mlr3.
 }
 \author{
 \strong{Maintainer}: Marvin Böcker \email{marvin.boecker@tu-dortmund.de}

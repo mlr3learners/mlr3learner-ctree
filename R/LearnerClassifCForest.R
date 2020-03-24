@@ -75,10 +75,10 @@ LearnerClassifCForest = R6Class("LearnerClassifCForest", inherit = LearnerClassi
         ParamLgl$new("scale", default = TRUE, tags = "predict"),
 
         # importance; OOB see predict, applyfun, cores see train
-        ParamInt$new("nperm", default = 1L, lower = 0L, tags = "importance"),
-        ParamFct$new("risk", default = "loglik", levels = c("loglik", "misclassification"), tags = "importance"),
-        ParamLgl$new("conditional", default = FALSE, tags = "importance"),
-        ParamDbl$new("threshold", default = 0.2, tags = "importance")
+        ParamInt$new("nperm", default = 1L, lower = 0L, tags = c("train", "importance")),
+        ParamFct$new("risk", default = "loglik", levels = c("loglik", "misclassification"), tags = c("train", "importance")),
+        ParamLgl$new("conditional", default = FALSE, tags = c("train", "importance")),
+        ParamDbl$new("threshold", default = 0.2, tags = c("train", "importance"))
         )
       )
 
