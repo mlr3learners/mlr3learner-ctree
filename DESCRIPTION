@@ -28,7 +28,7 @@ Imports:
     checkmate
 Suggests:
     bibtex,
-    testthat
+    testthat,
     sandwich
 Encoding: UTF-8
 NeedsCompilation: no
