@@ -24,13 +24,19 @@ LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamFct$new("teststat", levels = c("quadratic", "maximum"), default = "quadratic", tags = "train"),
-          ParamFct$new("splitstat", levels = c("quadratic", "maximum"), default = "quadratic", tags = "train"),
+          ParamFct$new("teststat", levels = c("quadratic", "maximum"),
+            default = "quadratic", tags = "train"),
+          ParamFct$new("splitstat", levels = c("quadratic", "maximum"),
+            default = "quadratic", tags = "train"),
           ParamLgl$new("splittest", default = FALSE, tags = "train"),
-          ParamFct$new("testtype", levels = c("Bonferroni", "MonteCarlo", "Univariate", "Teststatistic"), default = "Bonferroni", tags = "train"),
+          ParamFct$new("testtype", levels = c("Bonferroni", "MonteCarlo",
+            "Univariate", "Teststatistic"), default = "Bonferroni",
+            tags = "train"),
           ParamUty$new("nmax", tags = "train"),
-          ParamDbl$new("alpha", lower = 0, upper = 1, default = 0.05, tags = "train"),
-          ParamDbl$new("mincriterion", lower = 0, upper = 1, default = 0.95, tags = "train"),
+          ParamDbl$new("alpha", lower = 0, upper = 1, default = 0.05,
+            tags = "train"),
+          ParamDbl$new("mincriterion", lower = 0, upper = 1, default = 0.95,
+            tags = "train"),
           ParamDbl$new("logmincriterion", tags = "train"),
           ParamInt$new("minsplit", lower = 1L, default = 20L, tags = "train"),
           ParamInt$new("minbucket", lower = 1L, default = 7L, tags = "train"),
@@ -38,22 +44,28 @@ LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
           ParamLgl$new("stump", default = FALSE, tags = "train"),
           ParamLgl$new("lookahead", default = FALSE, tags = "train"),
           ParamLgl$new("MIA", default = FALSE, tags = "train"),
-          ParamInt$new("nresample", lower = 1L, default = 9999L, tags = "train"),
+          ParamInt$new("nresample", lower = 1L, default = 9999L,
+            tags = "train"),
           ParamDbl$new("tol", lower = 0, tags = "train"),
-          ParamInt$new("maxsurrogate", lower = 0L, default = 0L, tags = "train"),
+          ParamInt$new("maxsurrogate", lower = 0L, default = 0L,
+            tags = "train"),
           ParamLgl$new("numsurrogate", default = FALSE, tags = "train"),
-          ParamInt$new("mtry", lower = 0L, special_vals = list(Inf), default = Inf, tags = "train"),
-          ParamInt$new("maxdepth", lower = 0L, special_vals = list(Inf), default = Inf, tags = "train"),
+          ParamInt$new("mtry", lower = 0L, special_vals = list(Inf),
+            default = Inf, tags = "train"),
+          ParamInt$new("maxdepth", lower = 0L, special_vals = list(Inf),
+            default = Inf, tags = "train"),
           ParamLgl$new("multiway", default = FALSE, tags = "train"),
           ParamInt$new("splittry", lower = 0L, default = 2L, tags = "train"),
           ParamLgl$new("intersplit", default = FALSE, tags = "train"),
           ParamLgl$new("majority", default = FALSE, tags = "train"),
           ParamLgl$new("caseweights", default = FALSE, tags = "train"),
           ParamUty$new("applyfun", tags = "train"),
-          ParamInt$new("cores", special_vals = list(NULL), default = NULL, tags = "train"),
+          ParamInt$new("cores", special_vals = list(NULL), default = NULL,
+            tags = "train"),
           ParamLgl$new("saveinfo", default = TRUE, tags = "train"),
           ParamLgl$new("update", default = FALSE, tags = "train"),
-          ParamFct$new("splitflavour", default = "ctree", levels = c("ctree", "exhaustive"), tags = c("train", "control"))
+          ParamFct$new("splitflavour", default = "ctree",
+            levels = c("ctree", "exhaustive"), tags = c("train", "control"))
         )
       )
       ps$add_dep("nresample", "testtype", CondEqual$new("MonteCarlo"))
@@ -74,21 +86,20 @@ LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
     .train = function(task) {
       pars = self$param_set$get_values(tags = "train")
 
-      f = task$formula()
-      data = task$data()
-
       if ("weights" %in% task$properties) {
         pars$weights = task$weights$weight
       }
 
-      invoke(partykit::ctree, formula = f, data = data, .args = pars)
+      invoke(partykit::ctree, formula = task$formula(), data = task$data(),
+        .args = pars)
     },
 
     .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        response = invoke(predict, self$model, newdata = newdata, type = "response")
+        response = invoke(predict, self$model, newdata = newdata,
+          type = "response")
         PredictionClassif$new(task = task, response = response)
       } else {
         prob = invoke(predict, self$model, newdata = newdata, type = "prob")

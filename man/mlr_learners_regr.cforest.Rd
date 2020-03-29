@@ -69,7 +69,8 @@ Creates a new instance of this \link[R6:R6Class]{R6} class.
 \if{html}{\out{<a id="method-oob_error"></a>}}
 \if{latex}{\out{\hypertarget{method-oob_error}{}}}
 \subsection{Method \code{oob_error()}}{
-The out-of-bag error, calculated using the OOB predictions from \code{partykit}.
+The out-of-bag error, calculated using the OOB predictions from
+\code{partykit}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LearnerRegrCForest$oob_error()}\if{html}{\out{</div>}}
 }
