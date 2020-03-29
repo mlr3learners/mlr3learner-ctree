@@ -29,6 +29,7 @@ Imports:
 Suggests:
     bibtex,
     testthat
+    sandwich
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
