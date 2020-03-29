@@ -12,6 +12,7 @@ test_that("parameter setting works", {
   learner = LearnerClassifCForest$new()
   learner$param_set$values$ntree = 3
   learner$param_set$values$replace = TRUE
+  learner$param_set$values$fraction = 0.7
   learner$param_set$values$teststat = "maximum"
   learner$param_set$values$OOB = TRUE
   task = tsk("iris")
