@@ -16,7 +16,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
+LearnerRegrCTree = R6Class("LearnerRegrCTree",
+  inherit = LearnerRegr,
   public = list(
 
     #' @description
@@ -53,7 +54,12 @@ LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
           ParamInt$new("cores", special_vals = list(NULL), default = NULL, tags = "train"),
           ParamLgl$new("saveinfo", default = TRUE, tags = "train"),
           ParamLgl$new("update", default = FALSE, tags = "train"),
-          ParamLgl$new("splitflavour", default = FALSE, tags = "train")
+          ParamLgl$new("splitflavour", default = FALSE, tags = "train"),
+          ParamUty$new("offset", tags = "train"),
+          ParamUty$new("cluster", tags = "train"),
+          ParamUty$new("scores", tags = "train"),
+          ParamLgl$new("doFit", default = TRUE, tags = "train"),
+          ParamUty$new("pargs", default = mvtnorm::GenzBretz, tags = "train")
         )
       )
       ps$add_dep("nresample", "testtype", CondEqual$new("MonteCarlo"))

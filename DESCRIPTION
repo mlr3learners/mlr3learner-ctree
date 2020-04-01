@@ -19,11 +19,11 @@ Imports:
     data.table,
     mlr3,
     paradox,
-    partykit,
     R6
 Suggests:
     checkmate,
     bibtex,
+    partykit,
     testthat
 Encoding: UTF-8
 NeedsCompilation: no
