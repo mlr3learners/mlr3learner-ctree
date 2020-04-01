@@ -14,7 +14,7 @@ test_that("classif.ctree", {
 
 test_that("classif.ctree_control", {
   learner = lrn("classif.ctree")
-  fun = partykit::ctree_control()
+  fun = partykit::ctree_control
   exclude = c(
   )
 

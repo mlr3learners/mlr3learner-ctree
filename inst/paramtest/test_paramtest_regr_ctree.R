@@ -14,7 +14,7 @@ test_that("regr.ctree", {
 
 test_that("regr.ctree_control", {
   learner = lrn("regr.ctree")
-  fun = partykit::ctree_control()
+  fun = partykit::ctree_control
   exclude = c(
   )
 
