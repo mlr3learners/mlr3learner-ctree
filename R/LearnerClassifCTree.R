@@ -16,7 +16,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
+LearnerClassifCTree = R6Class("LearnerClassifCTree",
+  inherit = LearnerClassif,
   public = list(
 
     #' @description
@@ -24,10 +25,16 @@ LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
     initialize = function() {
       ps = ParamSet$new(
         params = list(
-          ParamFct$new("teststat", levels = c("quadratic", "maximum"), default = "quadratic", tags = "train"),
-          ParamFct$new("splitstat", levels = c("quadratic", "maximum"), default = "quadratic", tags = "train"),
+          ParamFct$new("teststat",
+            levels = c("quadratic", "maximum"),
+            default = "quadratic", tags = "train"),
+          ParamFct$new("splitstat",
+            levels = c("quadratic", "maximum"),
+            default = "quadratic", tags = "train"),
           ParamLgl$new("splittest", default = FALSE, tags = "train"),
-          ParamFct$new("testtype", levels = c("Bonferroni", "MonteCarlo", "Univariate", "Teststatistic"), default = "Bonferroni", tags = "train"),
+          ParamFct$new("testtype", levels = c(
+            "Bonferroni", "MonteCarlo",
+            "Univariate", "Teststatistic"), default = "Bonferroni", tags = "train"),
           ParamUty$new("nmax", tags = "train"),
           ParamDbl$new("alpha", lower = 0, upper = 1, default = 0.05, tags = "train"),
           ParamDbl$new("mincriterion", lower = 0, upper = 1, default = 0.95, tags = "train"),
@@ -43,7 +50,9 @@ LearnerClassifCTree = R6Class("LearnerClassifCTree", inherit = LearnerClassif,
           ParamInt$new("maxsurrogate", lower = 0L, default = 0L, tags = "train"),
           ParamLgl$new("numsurrogate", default = FALSE, tags = "train"),
           ParamInt$new("mtry", lower = 0L, special_vals = list(Inf), default = Inf, tags = "train"),
-          ParamInt$new("maxdepth", lower = 0L, special_vals = list(Inf), default = Inf, tags = "train"),
+          ParamInt$new("maxdepth",
+            lower = 0L, special_vals = list(Inf),
+            default = Inf, tags = "train"),
           ParamLgl$new("multiway", default = FALSE, tags = "train"),
           ParamInt$new("splittry", lower = 0L, default = 2L, tags = "train"),
           ParamLgl$new("intersplit", default = FALSE, tags = "train"),
