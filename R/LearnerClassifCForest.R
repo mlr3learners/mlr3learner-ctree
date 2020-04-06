@@ -22,9 +22,10 @@ LearnerClassifCForest = R6Class("LearnerClassifCForest",
     #' @description
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
+
       ps = ParamSet$new(list(
-        # missing: weights (see bottom), subset, offset, cluster, strata
-        # (see FIXME: below), na.action, ytrafo, scores
+        # missing: weights (see bottom), subset, strata
+        # (see FIXME: below), na.action, ytrafo
         ParamInt$new("ntree", default = 500L, lower = 1L, tags = "train"),
         # replace and fraction go in perturb (named list)
         ParamLgl$new("replace", default = FALSE, tags = "train"),
@@ -50,11 +51,9 @@ LearnerClassifCForest = R6Class("LearnerClassifCForest",
           tags = "train"),
         ParamUty$new("nmax", tags = "train"),
 
-        # pargs arguments as a list for GenzBretz() within ctree_control;
-        # currently not used
-        #ParamInt$new("maxpts", default = 25000L, lower = 1L, tags = "train"),
-        #ParamDbl$new("abseps", default = 0.001, lower = 0, tags = "train"),
-        #ParamDbl$new("releps", default = 0, tags = "train"),
+        # pargs arguments as a list for GenzBretz() within ctree_control:
+        # maxpts, abseps, releps
+        ParamUty$new("pargs", default = mvtnorm::GenzBretz, tags = "train"),
 
         ParamDbl$new("alpha", default = 0.05, lower = 0, upper = 1,
           tags = "train"),
@@ -84,6 +83,9 @@ LearnerClassifCForest = R6Class("LearnerClassifCForest",
         ParamLgl$new("update", default = FALSE, tags = "train"),
         ParamFct$new("splitflavour", default = "ctree",
           levels = c("ctree", "exhaustive"), tags = "train"),
+        ParamUty$new("offset", tags = "train"),
+        ParamUty$new("cluster", tags = "train"),
+        ParamUty$new("scores", tags = "train"),
 
         # predict; missing FUN and simplify (not needed here)
         ParamLgl$new("OOB", default = FALSE, tags = c("predict", "importance")),
@@ -100,7 +102,7 @@ LearnerClassifCForest = R6Class("LearnerClassifCForest",
           tags = c("train", "importance")),
         ParamDbl$new("threshold", default = 0.2,
           tags = c("train", "importance"))
-        )
+      )
       )
 
       ps$add_dep("nresample", on = "testtype",
@@ -132,14 +134,14 @@ LearnerClassifCForest = R6Class("LearnerClassifCForest",
     # #'
     # #' @return Named `numeric()`.
     # # FIXME: needs fix in partykit, WIP
-    #importance = function() {
+    # importance = function() {
     #  if (is.null(self$model)) {
     #    stopf("No model stored")
     #  }
     #  pars = self$param_set$get_values(tags = "importance")
     #  sort(invoke(partykit::varimp, object = self$model, .args = pars),
     #    decreasing = TRUE)
-    #},
+    # },
 
     #' @description
     #' The out-of-bag error, calculated using the OOB predictions from
@@ -160,6 +162,7 @@ LearnerClassifCForest = R6Class("LearnerClassifCForest",
 
   private = list(
     .train = function(task) {
+
       pars = self$param_set$get_values(tags = "train")
       pars_control = pars[which(names(pars) %in%
         setdiff(formalArgs(partykit::ctree_control),

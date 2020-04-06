@@ -1,6 +1,6 @@
 Package: mlr3learners.partykit
 Title: Learners from partykit package for 'mlr3'
-Version: 0.1.0.9000
+Version: 0.2.0.9000
 Authors@R:
     c(person(given = "Marvin",
              family = "Böcker",
@@ -14,23 +14,25 @@ Authors@R:
              family = "Schneider",
              role = "aut",
              email = "lennart.sch@web.de"))
-Description: Adds `ctree()`, and `cforest()` from the partykit package to mlr3.
+Description: Adds `ctree()`, and `cforest()` from the partykit
+    package to mlr3.
 License: LGPL-3
 Depends:
     R (>= 3.1.0)
 Imports:
-    mlr3misc,
     data.table,
     mlr3,
+    mlr3misc,
     paradox,
-    partykit,
     R6
 Suggests:
-    checkmate,
     bibtex,
+    checkmate,
+    partykit,
     testthat
+RdMacros:
+    mlr3misc
 Encoding: UTF-8
 NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
-RdMacros: mlr3misc
