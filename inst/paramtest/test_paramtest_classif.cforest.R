@@ -41,38 +41,3 @@ Missing parameters:
     paste0("- '", ParamTest$missing, "'", collapse = "
 ")))
 })
-
-test_that("classif.cforest_predict", {
-  learner = lrn("classif.cforest")
-  fun = partykit:::predict.cforest
-  exclude = c(
-    "object", # handled in mlr
-    "newdata", # handled in mlr
-    "type", # handled in mlr
-    "FUN" # not in line with mlr3 predictions
-  )
-
-  ParamTest = run_paramtest(learner, fun, exclude)
-  expect_true(ParamTest, info = paste0(
-    "
-Missing parameters:
-",
-    paste0("- '", ParamTest$missing, "'", collapse = "
-")))
-})
-
-test_that("classif.cforest_importance", {
-  learner = lrn("classif.cforest")
-  fun = partykit:::varimp.cforest
-  exclude = c(
-    "object" # handled in mlr
-  )
-
-  ParamTest = run_paramtest(learner, fun, exclude)
-  expect_true(ParamTest, info = paste0(
-    "
-Missing parameters:
-",
-    paste0("- '", ParamTest$missing, "'", collapse = "
-")))
-})

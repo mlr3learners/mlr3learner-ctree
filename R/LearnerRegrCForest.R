@@ -37,7 +37,9 @@ LearnerRegrCForest = R6Class("LearnerRegrCForest",
         ParamInt$new("cores", default = NULL, special_vals = list(NULL),
           tags = c("train", "importance")),
         ParamLgl$new("trace", default = FALSE, tags = "train"),
-
+        ParamUty$new("offset", tags = "train"),
+        ParamUty$new("cluster", tags = "train"),
+        ParamUty$new("scores", tags = "train"),
 
         # all in ctree_control(); missing: mtry, applyfun, cores
         # (see above, passed directly)
@@ -83,9 +85,6 @@ LearnerRegrCForest = R6Class("LearnerRegrCForest",
         ParamLgl$new("update", default = FALSE, tags = "train"),
         ParamFct$new("splitflavour", default = "ctree",
           levels = c("ctree", "exhaustive"), tags = "train"),
-        ParamUty$new("offset", tags = "train"),
-        ParamUty$new("cluster", tags = "train"),
-        ParamUty$new("scores", tags = "train"),
 
         # predict; missing FUN and simplify (not needed here)
         ParamLgl$new("OOB", default = FALSE, tags = c("predict", "importance")),
