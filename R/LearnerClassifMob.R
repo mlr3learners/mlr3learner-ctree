@@ -5,8 +5,6 @@
 #' @description
 #' Classification model-based recursive partitioning.
 #' Calls [partykit::mob()] from package \CRANpkg{partykit}.
-#' FIXME: this learner is not straightforward to use; needs gallery post or
-#' detailed description.
 #'
 #' @templateVar id classif.mob
 #' @template section_dictionary_learner
@@ -26,13 +24,15 @@ LearnerClassifMob = R6Class("LearnerClassifMob", inherit = LearnerClassif,
     #' Creates a new instance of this [R6][R6::R6Class] class.
     initialize = function() {
       ps = ParamSet$new(list(
-        # missing: subset, na.action, weights (see bottom), offset, cluster
+        # missing: subset, na.action, weights (see bottom)
         ParamUty$new("rhs", custom_check = checkmate::check_character,
           tags = "train"),
         ParamUty$new("fit", custom_check = function(x) {
-            checkmate::check_function(x,
-              args = c("y", "x", "start", "weights", "offset", "..."))
-          }, tags = "train"),
+          checkmate::check_function(x,
+            args = c("y", "x", "start", "weights", "offset", "..."))
+        }, tags = "train"),
+        ParamUty$new("offset", tags = "train"),
+        ParamUty$new("cluster", tags = "train"),
         # all in mob_control()
         ParamDbl$new("alpha", default = 0.05, lower = 0, upper = 1,
           tags = "train"),
@@ -83,8 +83,8 @@ LearnerClassifMob = R6Class("LearnerClassifMob", inherit = LearnerClassif,
         ParamUty$new("predict_fun", custom_check = function(x) {
           checkmate::check_function(x,
             args = c("object", "newdata", "task", ".type"))
-          }, tags = "predict")
-        )
+        }, tags = "predict")
+      )
       )
 
       ps$add_dep("nrep", on = "ordinal", cond = CondEqual$new("L2"))
@@ -105,6 +105,7 @@ LearnerClassifMob = R6Class("LearnerClassifMob", inherit = LearnerClassif,
 
   private = list(
     .train = function(task) {
+
       # FIXME: check if rhs variables are present in data?
       formula = task$formula(self$param_set$values$rhs)
       pars = self$param_set$get_values(tags = "train")

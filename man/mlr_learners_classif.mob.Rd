@@ -7,8 +7,6 @@
 \description{
 Classification model-based recursive partitioning.
 Calls \code{\link[partykit:mob]{partykit::mob()}} from package \CRANpkg{partykit}.
-FIXME: this learner is not straightforward to use; needs gallery post or
-detailed description.
 }
 \section{Dictionary}{
 

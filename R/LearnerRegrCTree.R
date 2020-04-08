@@ -16,7 +16,8 @@
 #' @export
 #' @template seealso_learner
 #' @template example
-LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
+LearnerRegrCTree = R6Class("LearnerRegrCTree",
+  inherit = LearnerRegr,
   public = list(
 
     #' @description
@@ -31,7 +32,7 @@ LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
           ParamLgl$new("splittest", default = FALSE, tags = "train"),
           ParamFct$new("testtype", levels = c("Bonferroni", "MonteCarlo",
             "Univariate", "Teststatistic"), default = "Bonferroni",
-            tags = "train"),
+          tags = "train"),
           ParamUty$new("nmax", tags = "train"),
           ParamDbl$new("alpha", lower = 0, upper = 1, default = 0.05,
             tags = "train"),
@@ -65,7 +66,12 @@ LearnerRegrCTree = R6Class("LearnerRegrCTree", inherit = LearnerRegr,
           ParamLgl$new("saveinfo", default = TRUE, tags = "train"),
           ParamLgl$new("update", default = FALSE, tags = "train"),
           ParamFct$new("splitflavour", default = "ctree",
-            levels = c("ctree", "exhaustive"), tags = c("train", "control"))
+            levels = c("ctree", "exhaustive"), tags = c("train", "control")),
+          ParamUty$new("offset", tags = "train"),
+          ParamUty$new("cluster", tags = "train"),
+          ParamUty$new("scores", tags = "train"),
+          ParamLgl$new("doFit", default = TRUE, tags = "train"),
+          ParamUty$new("pargs", default = mvtnorm::GenzBretz, tags = "train")
         )
       )
       ps$add_dep("nresample", "testtype", CondEqual$new("MonteCarlo"))
