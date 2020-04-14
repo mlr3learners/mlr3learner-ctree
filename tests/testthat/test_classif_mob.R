@@ -12,14 +12,6 @@ test_that("autotest", {
   learner$feature_types = c("logical", "integer", "numeric", "factor", "ordered")
   learner$properties = c("twoclass", "weights")
 
-  # FIXME: this is from mlr3learners helpers
-  prob_vector_to_matrix = function(p, levs) {
-    stopifnot(is.numeric(p))
-    y = matrix(c(1 - p, p), ncol = 2L, nrow = length(p))
-    colnames(y) = levs
-    y
-  }
-
   predict_fun = function(object, newdata, task, .type) {
     p = unname(predict(object, newdata = newdata, type = "response"))
     levs = task$levels(task$target_names)[[1L]]
