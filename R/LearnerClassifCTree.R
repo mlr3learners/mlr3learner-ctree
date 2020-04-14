@@ -96,19 +96,20 @@ LearnerClassifCTree = R6Class("LearnerClassifCTree",
         pars$weights = task$weights$weight
       }
 
-      invoke(partykit::ctree, formula = task$formula(), data = task$data(),
-        .args = pars)
+      mlr3misc::invoke(partykit::ctree, formula = task$formula(),
+        data = task$data(), .args = pars)
     },
 
     .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
 
       if (self$predict_type == "response") {
-        response = invoke(predict, self$model, newdata = newdata,
+        response = mlr3misc::invoke(predict, self$model, newdata = newdata,
           type = "response")
         PredictionClassif$new(task = task, response = response)
       } else {
-        prob = invoke(predict, self$model, newdata = newdata, type = "prob")
+        prob = mlr3misc::invoke(predict, self$model, newdata = newdata,
+          type = "prob")
         PredictionClassif$new(task = task, prob = prob)
       }
     }

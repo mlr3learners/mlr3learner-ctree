@@ -137,8 +137,8 @@ LearnerRegrCForest = R6Class("LearnerRegrCForest",
     #    stopf("No model stored")
     #  }
     #  pars = self$param_set$get_values(tags = "importance")
-    #  sort(invoke(partykit::varimp, object = self$model, .args = pars),
-    #    decreasing = TRUE)
+    #  sort(mlr3misc::invoke(partykit::varimp, object = self$model,
+    #    .args = pars), decreasing = TRUE)
     # },
 
     #' @description
@@ -147,7 +147,7 @@ LearnerRegrCForest = R6Class("LearnerRegrCForest",
     #'
     #' @return `numeric(1)`.
     oob_error = function() {
-      preds = invoke(predict, object = self$model, newdata = NULL,
+      preds = mlr3misc::invoke(predict, object = self$model, newdata = NULL,
         type = "response", OOB = TRUE, FUN = NULL, simplify = TRUE,
         scale = TRUE)
       mean((self$model$data[[as.character(attr(self$model$data,
@@ -165,7 +165,7 @@ LearnerRegrCForest = R6Class("LearnerRegrCForest",
         ))] # see ctree_control
       pars = pars[names(pars) %nin%
         c("replace", "fraction", names(pars_control))]
-      control = invoke(partykit::ctree_control, .args = pars_control)
+      control = mlr3misc::invoke(partykit::ctree_control, .args = pars_control)
       # perturb parameters need special handling; FIXME: easier way?
       perturb = list(replace = FALSE, fraction = 0.632)
       if (!is.null(self$param_set$values$replace)) {
@@ -175,7 +175,7 @@ LearnerRegrCForest = R6Class("LearnerRegrCForest",
         perturb$fraction = self$param_set$values$fraction
       }
 
-      invoke(partykit::cforest,
+      mlr3misc::invoke(partykit::cforest,
         formula = task$formula(),
         data = task$data(),
         weights = task$weights$weight, # weights are handled here
@@ -189,7 +189,7 @@ LearnerRegrCForest = R6Class("LearnerRegrCForest",
     .predict = function(task) {
       pars = self$param_set$get_values(tags = "predict")
       newdata = task$data(cols = task$feature_names)
-      preds = invoke(predict, object = self$model, newdata = newdata,
+      preds = mlr3misc::invoke(predict, object = self$model, newdata = newdata,
         type = self$predict_type, .args = pars)
       PredictionRegr$new(task = task, response = preds)
     }
