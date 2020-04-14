@@ -96,14 +96,14 @@ LearnerRegrCTree = R6Class("LearnerRegrCTree",
         pars$weights = task$weights$weight
       }
 
-      invoke(partykit::ctree, formula = task$formula(), data = task$data(),
-        .args = pars)
+      mlr3misc::invoke(partykit::ctree, formula = task$formula(),
+        data = task$data(), .args = pars)
     },
 
     .predict = function(task) {
       newdata = task$data(cols = task$feature_names)
 
-      p = invoke(predict, self$model, newdata = newdata)
+      p = mlr3misc::invoke(predict, self$model, newdata = newdata)
       PredictionRegr$new(task = task, response = p)
     }
   )

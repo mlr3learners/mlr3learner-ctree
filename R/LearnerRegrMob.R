@@ -114,15 +114,15 @@ LearnerRegrMob = R6Class("LearnerRegrMob", inherit = LearnerRegr,
       pars_additional = self$param_set$values$additional
       pars = pars[names(pars) %nin%
         c("rhs", names(pars_control), "additional")]
-      control = invoke(partykit::mob_control, .args = pars_control)
+      control = mlr3misc::invoke(partykit::mob_control, .args = pars_control)
       if ("weights" %in% task$properties) { # weights are handled here
-        pars = insert_named(pars, list(weights = task$weights$weight))
+        pars = mlr3misc::insert_named(pars, list(weights = task$weights$weight))
       }
       # append the additional parameters to be passed to the fitting function
       pars = append(pars, pars_additional)
 
       # FIXME: contrasts?
-      invoke(partykit::mob,
+      mlr3misc::invoke(partykit::mob,
         formula = formula,
         data = task$data(),
         control = control,
@@ -137,7 +137,7 @@ LearnerRegrMob = R6Class("LearnerRegrMob", inherit = LearnerRegr,
       # want) this should return a two column matrix holding the responses in
       # the first and the standard errors (or NA) in the second column
       # .type is then the actual predict type as set for the learner
-      preds = invoke(predict, object = self$model, newdata = newdata,
+      preds = mlr3misc::invoke(predict, object = self$model, newdata = newdata,
         type = self$param_set$values$predict_fun, task = task,
         .type = self$predict_type)
       if (self$predict_type == "response") {

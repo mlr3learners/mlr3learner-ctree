@@ -13,7 +13,8 @@ Authors@R:
       person(given = "Lennart",
              family = "Schneider",
              role = "aut",
-             email = "lennart.sch@web.de"))
+             email = "lennart.sch@web.de",
+             comment = c(ORCID = "0000-0003-4152-5308")))
 Description: Adds `ctree()`, and `mob()` from the partykit
     package to mlr3.
 License: LGPL-3

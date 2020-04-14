@@ -15,7 +15,7 @@ Adds `ctree()`, and `mob()` from the partykit
 Authors:
 \itemize{
   \item Marc Becker \email{marcbecker@posteo.de}
-  \item Lennart Schneider \email{lennart.sch@web.de}
+  \item Lennart Schneider \email{lennart.sch@web.de} (\href{https://orcid.org/0000-0003-4152-5308}{ORCID})
 }
 
 }
