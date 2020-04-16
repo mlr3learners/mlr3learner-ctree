@@ -13,6 +13,8 @@ register_mlr3 = function(libname, pkgname) {
   # add the learner to the dictionary
   x$add("classif.ctree", LearnerClassifCTree)
   x$add("regr.ctree", LearnerRegrCTree)
+  x$add("classif.cforest", LearnerClassifCForest)
+  x$add("regr.cforest", LearnerRegrCForest)
 }
 
 .onLoad = function(libname, pkgname) { # nolint
