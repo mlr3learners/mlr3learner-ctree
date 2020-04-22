@@ -15,6 +15,8 @@ register_mlr3 = function(libname, pkgname) {
   x$add("regr.ctree", LearnerRegrCTree)
   x$add("classif.mob", LearnerClassifMob)
   x$add("regr.mob", LearnerRegrMob)
+  x$add("classif.cforest", LearnerClassifCForest)
+  x$add("regr.cforest", LearnerRegrCForest)
 }
 
 .onLoad = function(libname, pkgname) { # nolint
