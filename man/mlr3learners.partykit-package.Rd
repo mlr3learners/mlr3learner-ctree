@@ -6,7 +6,8 @@
 \alias{mlr3learners.partykit-package}
 \title{mlr3learners.partykit: Learners from partykit package for 'mlr3'}
 \description{
-Adds `ctree()` from the partykit package to mlr3.
+Adds `ctree()`, `cforest()` and `mob()` from the partykit
+    package to mlr3.
 }
 \author{
 \strong{Maintainer}: Marvin Böcker \email{marvin.boecker@tu-dortmund.de}
@@ -14,6 +15,7 @@ Adds `ctree()` from the partykit package to mlr3.
 Authors:
 \itemize{
   \item Marc Becker \email{marcbecker@posteo.de}
+  \item Lennart Schneider \email{lennart.sch@web.de} (\href{https://orcid.org/0000-0003-4152-5308}{ORCID})
 }
 
 }

@@ -1,6 +1,6 @@
 Package: mlr3learners.partykit
 Title: Learners from partykit package for 'mlr3'
-Version: 0.2.0.9000
+Version: 0.2.1.9000
 Authors@R:
     c(person(given = "Marvin",
              family = "Böcker",
@@ -9,8 +9,14 @@ Authors@R:
       person(given = "Marc",
              family = "Becker",
              role = "aut",
-             email = "marcbecker@posteo.de"))
-Description: Adds `ctree()` from the partykit package to mlr3.
+             email = "marcbecker@posteo.de"),
+      person(given = "Lennart",
+             family = "Schneider",
+             role = "aut",
+             email = "lennart.sch@web.de",
+             comment = c(ORCID = "0000-0003-4152-5308")))
+Description: Adds `ctree()`, `cforest()` and `mob()` from the partykit
+    package to mlr3.
 License: LGPL-3
 Depends:
     R (>= 3.1.0)
@@ -24,6 +30,7 @@ Suggests:
     bibtex,
     checkmate,
     partykit,
+    sandwich,
     testthat
 RdMacros:
     mlr3misc

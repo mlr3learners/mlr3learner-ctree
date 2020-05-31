@@ -8,7 +8,7 @@
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 <!-- badges: end -->
 
-Adds `ctree()` from the {partykit} package to {mlr3}.
+Adds `ctree()`, `cforest()` and `mob()` from the {partykit} package to {mlr3}.
 
 Install the latest release of the package via
 
