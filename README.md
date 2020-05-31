@@ -1,12 +1,11 @@
 # mlr3learners.partykit
 
 <!-- badges: start -->
-
-[![R CMD Check via {tic}](https://github.com/mlr3learners/mlr3learners.partykit/workflows/R%20CMD%20Check%20via%20{tic}/badge.svg?branch=master)](https://github.com/mlr3learners/mlr3learners.partykit/actions)
+[![tic](https://github.com/mlr3learners/mlr3learners.partykit/workflows/tic/badge.svg?branch=master)](https://github.com/mlr3learners/mlr3learners.partykit/actions)
 ![Parameter Check](https://github.com/mlr3learners/mlr3learners.partykit/workflows/Parameter%20Check/badge.svg?branch=master)
+![mlr3learners.drat](https://github.com/mlr3learners/mlr3learners.partykit/workflows/mlr3learners.drat/badge.svg?branch=master)
 [![codecov](https://codecov.io/gh/mlr3learners/mlr3learners.partykit/branch/master/graph/badge.svg)](https://codecov.io/gh/mlr3learners/mlr3learners.partykit)
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
-
 <!-- badges: end -->
 
 Adds `ctree()` from the {partykit} package to {mlr3}.
